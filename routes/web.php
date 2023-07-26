@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('artists',[\App\Http\Controllers\ArtistsController::class, 'index'])
+    ->name('artists.index');
