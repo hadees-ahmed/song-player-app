@@ -10,7 +10,7 @@ class ArtistsController extends Controller
     public function index(){
         $artists = Artist::all();
 
-        return view('dashboard',[
+        return view('artists',[
             'artists' => $artists
         ]);
     }
