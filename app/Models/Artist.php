@@ -9,7 +9,13 @@ class Artist extends Model
 {
     use HasFactory;
 
-    public function songs(){
+    public function songs()
+    {
         return $this->hasMany(Song::class);
+    }
+
+    public function language()
+    {
+        return $this->belongsTo(Language::class);
     }
 }
