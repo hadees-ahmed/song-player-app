@@ -20,3 +20,6 @@ Route::get('/', function () {
 
 Route::get('artists',[\App\Http\Controllers\ArtistsController::class, 'index'])
     ->name('artists.index');
+
+Route::get('artists/{artist}/songs', [\App\Http\Controllers\SongsController::class, 'index'])
+    ->name('songs.index');
