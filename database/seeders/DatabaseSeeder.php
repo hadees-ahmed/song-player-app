@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Artist;
+use App\Models\Song;
 use App\Models\User;
 use Carbon\Language;
 use Database\Factories\LanguageFactory;
@@ -26,5 +27,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Language::factory(5)->create();
 
         Artist::factory(50)->create();
+        Song::factory(300)->create();
     }
 }
