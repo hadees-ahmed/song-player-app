@@ -1,5 +1,14 @@
 <a href=""><-Dashboard</a>
-<h2> <img src="" alt="" class="rounded-sm" width="20" height="30">{{$artist->name}}</h2>
+<h1>
+@if($artist->image)
+<img src="{{asset('storage/' . $artist->image)}}" alt="not found" class="rounded-sm" width="20" height="30">
+    @else
+    <img src="{{asset('storage/artist-images/bjnlGICVebXCMTqYvEUf6uCxZyQs2YFNHV1GoVW5.png')}}"
+         alt="not found" class="rounded-sm" width="20" height="30">
+@endif
+    {{$artist->name}}
+</h1>
+
 <h1>{{$artist->info}}</h1>
 
 <h3>{{'Songs'}}</h3>

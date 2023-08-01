@@ -23,3 +23,6 @@ Route::get('artists',[\App\Http\Controllers\ArtistsController::class, 'index'])
 
 Route::get('artists/{artist}/songs', [\App\Http\Controllers\SongsController::class, 'index'])
     ->name('songs.index');
+
+Route::post('artists/store',[\App\Http\Controllers\ArtistsController::class,'store'])
+    ->name('artists.store');
