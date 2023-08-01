@@ -29,6 +29,17 @@
     <input type="submit" value="search">
 </form>
 
+<form method="POST" action="{{route('artists.store')}}" enctype="multipart/form-data">
+    @csrf
+    <input type="file" name="artist_image">
+    <select name="artist_id">
+        @foreach($artists as $artist)
+        <option value="{{$artist->id}}">{{$artist->name}}</option>
+        @endforeach
+    </select>
+    <input type="submit" value="save">
+</form>
+
 <table>
     <tr>
         <th>Name</th>
@@ -38,7 +49,12 @@
     <tr>
 
         <td>
-            <img src="" alt="" class="rounded-sm" width="20" height="30">
+            @if(isset($artist->image))
+            <img src="{{asset('storage/' . $artist->image)}}" alt="" class="rounded-sm" width="20" height="30">
+            @else
+                <img src="{{asset('storage/artist-images/bjnlGICVebXCMTqYvEUf6uCxZyQs2YFNHV1GoVW5.png')}}"
+                     alt="not found" class="rounded-sm" width="20" height="30">
+            @endif
             <a href="{{route('songs.index', ['artist' => $artist->id])}}">{{$artist->name}}(Song Count)</a>
         </td>
         <td>{{$artist->language->name}}</td>

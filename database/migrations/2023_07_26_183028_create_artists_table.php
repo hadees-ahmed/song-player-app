@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('info');
             $table->date('date_of_birth');
             $table->unsignedTinyInteger('language_id');
+            $table->string('image')->unique()->nullable();
             $table->timestamps();
 
             $table->foreign('language_id')->references('id')->on('languages');

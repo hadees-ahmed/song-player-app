@@ -14,4 +14,13 @@ class ArtistsController extends Controller
             'artists' => $artists
         ]);
     }
+
+    public function store(Request $request){
+
+        $request->file('artist_image')->store('artist-images');
+
+        Artist::where('id', $request->get('artist_id'))->update(['image' => $request->file('artist_image')->store('artist-images')]);
+
+        return redirect()->back();
+    }
 }
