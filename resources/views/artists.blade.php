@@ -32,6 +32,10 @@
 <form method="POST" action="{{route('artists.store')}}" enctype="multipart/form-data">
     @csrf
     <input type="file" name="artist_image">
+
+    @error('artist_image')
+    <p style="color: red">{{$message}}</p>
+    @enderror
     <select name="artist_id">
         @foreach($artists as $artist)
         <option value="{{$artist->id}}">{{$artist->name}}</option>

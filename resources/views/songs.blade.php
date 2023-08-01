@@ -1,6 +1,6 @@
 <a href=""><-Dashboard</a>
 <h1>
-@if($artist->image != null)
+@if($artist->image)
 <img src="{{asset('storage/' . $artist->image)}}" alt="not found" class="rounded-sm" width="20" height="30">
     @else
     <img src="{{asset('storage/artist-images/bjnlGICVebXCMTqYvEUf6uCxZyQs2YFNHV1GoVW5.png')}}"
