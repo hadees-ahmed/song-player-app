@@ -39,7 +39,7 @@
 
         <td>
             <img src="" alt="" class="rounded-sm" width="20" height="30">
-            <a href="{{route('songs.index', ['artist' => $artist->id])}}">{{$artist->name}}(Song Count)</a>
+            <a href="{{route('songs.index', ['artist' => $artist->id])}}">{{$artist->name}} {{'( ' . $artist->songs_count . ' Songs )'}}</a>
         </td>
         <td>{{$artist->language->name}}</td>
     </tr>
