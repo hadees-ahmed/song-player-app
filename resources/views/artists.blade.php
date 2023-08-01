@@ -53,13 +53,14 @@
     <tr>
 
         <td>
+
             @if(isset($artist->image))
             <img src="{{asset('storage/' . $artist->image)}}" alt="" class="rounded-sm" width="20" height="30">
             @else
                 <img src="{{asset('storage/artist-images/bjnlGICVebXCMTqYvEUf6uCxZyQs2YFNHV1GoVW5.png')}}"
                      alt="not found" class="rounded-sm" width="20" height="30">
             @endif
-            <a href="{{route('songs.index', ['artist' => $artist->id])}}">{{$artist->name}}(Song Count)</a>
+            <a href="{{route('songs.index', ['artist' => $artist->id])}}">{{$artist->name}} {{'( ' . $artist->songs_count . ' Songs )'}}</a>
         </td>
         <td>{{$artist->language->name}}</td>
     </tr>
