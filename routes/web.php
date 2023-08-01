@@ -13,10 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/',[\App\Http\Controllers\DashboardController::class, 'index'])
+    ->name('dashboard.index');
 
 Route::get('artists',[\App\Http\Controllers\ArtistsController::class, 'index'])
     ->name('artists.index');
@@ -24,5 +22,10 @@ Route::get('artists',[\App\Http\Controllers\ArtistsController::class, 'index'])
 Route::get('artists/{artist}/songs', [\App\Http\Controllers\SongsController::class, 'index'])
     ->name('songs.index');
 
+Route::get('songs/create',[\App\Http\Controllers\SongsController::class, 'create'])
+    ->name('songs.create');
+
+Route::post('songs/store', [\App\Http\Controllers\SongsController::class, 'store'])
+    ->name('songs.store');
 Route::post('artists/store',[\App\Http\Controllers\ArtistsController::class,'store'])
     ->name('artists.store');

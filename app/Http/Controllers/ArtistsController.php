@@ -15,6 +15,7 @@ class ArtistsController extends Controller
         return view('artists',[
             'artists' => $artists
         ]);
+
     }
 
     public function store(StoreArtistRequest $request){
