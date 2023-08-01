@@ -14,5 +14,6 @@ class ArtistsController extends Controller
         return view('artists',[
             'artists' => $artists
         ]);
+
     }
 }
