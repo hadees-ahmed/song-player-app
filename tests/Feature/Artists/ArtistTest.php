@@ -54,4 +54,13 @@ class ArtistTest extends TestCase
         $this->get('artists/' . $artist->id . '/songs')
             ->assertSee($song->name);
     }
+
+    public function test_artist_image_are_shown_besides_its_name(): void
+    {
+        $language = Language::factory()->create();
+        $artist = Artist::factory()->create();
+
+        $this->get('artists/' . $artist->id . '/songs')
+            ->assertSee($artist->image);
+    }
 }
