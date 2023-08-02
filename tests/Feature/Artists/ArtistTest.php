@@ -11,16 +11,7 @@ use Tests\TestCase;
 
 class ArtistTest extends TestCase
 {
-    use databasemigrations;
-    /**
-     * A basic feature test example.
-     */
-    public function test_example(): void
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
+    use DatabaseMigrations;
 
     public function test_artist_page_display_artists(): void
     {
