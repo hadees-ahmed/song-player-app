@@ -23,7 +23,7 @@ class StoreSongRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255|regex:/^[a-zA-Z _-]+$/u',
-            'audio' => 'required',
+            'audio' => 'required|mimes:mp3,wav,ogg,mp3',
             'artist_id' => 'required'
         ];
     }
