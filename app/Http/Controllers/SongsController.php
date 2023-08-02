@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSongRequest;
 use App\Models\Artist;
 use App\Models\Song;
+use App\Services\Audio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
@@ -14,7 +15,7 @@ class SongsController extends Controller
     {
         $songs = $artist->songs;
 
-        return view('songs',[
+        return view('songs.index',[
             'songs' => $songs,
             'artist' => $artist
         ]);
@@ -28,17 +29,17 @@ class SongsController extends Controller
     public function store(StoreSongRequest $request)
     {
         $attributes = $request->validated();
-        // Remove the 'audio' key from the array
-        Arr::forget($attributes, 'audio');
+
 
         $attributes['path'] = $request->file('audio')->store('songs');
+        $attributes['duration'] = (new Audio())->getDuration($request->file('audio')
+            ->path()) ?? 0;
 
-        $attributes['duration'] = 10;
-
+        // Remove the 'audio' key from the array
+        Arr::forget($attributes, 'audio');
 
         Song::create($attributes);
 
         return view('dashboard');
-
     }
 }
