@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class FavoriteSongsController extends Controller
 {
+    public function index(User $user)
+    {
+        return view('songs.index', ['songs' => $user->favorites]);
+    }
+
     public function store(Song $song)
     {
         // @TODO will add auth user when the login functionality will be created

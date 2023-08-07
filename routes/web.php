@@ -63,4 +63,8 @@ Route::get('remove/{song}/favorites',[\App\Http\Controllers\FavoriteSongsControl
     ->name('remove.favorites')
     ->middleware('auth');
 
+Route::get('user/{user}/favorites', [\App\Http\Controllers\FavoriteSongsController::class, 'index'])
+    ->name('user.favorite.songs')
+    ->middleware('auth');
+
 require __DIR__.'/auth.php';
