@@ -1,4 +1,4 @@
-<div class="p-6 text-gray-900 dark:text-gray-100">
+<div class="p-6 text-gray-900">
     {{ $song->name }}
     {{ 'Duration= ' . formatDuration($song->duration)}}
     {{'views =' . $song->views}}
