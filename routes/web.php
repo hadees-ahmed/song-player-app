@@ -35,15 +35,15 @@ Route::get('artists',[\App\Http\Controllers\ArtistsController::class, 'index'])
     ->name('artists.index')
     ->middleware('auth');
 
-Route::get('artists/{artist}/songs', [\App\Http\Controllers\SongsController::class, 'index'])
+Route::get('artists/{artist}/songs', [\App\Http\Controllers\ArtistSongsController::class, 'index'])
     ->name('songs.index')
     ->middleware('auth');
 
-Route::get('songs/create',[\App\Http\Controllers\SongsController::class, 'create'])
+Route::get('songs/create',[\App\Http\Controllers\ArtistSongsController::class, 'create'])
     ->name('songs.create')
     ->middleware('auth');
 
-Route::post('songs/store', [\App\Http\Controllers\SongsController::class, 'store'])
+Route::post('songs/store', [\App\Http\Controllers\ArtistSongsController::class, 'store'])
     ->name('songs.store')
     ->middleware('auth');
 
@@ -65,6 +65,10 @@ Route::get('remove/{song}/favorites',[\App\Http\Controllers\FavoriteSongsControl
 
 Route::get('user/{user}/favorites', [\App\Http\Controllers\FavoriteSongsController::class, 'index'])
     ->name('user.favorite.songs')
+    ->middleware('auth');
+
+Route::get('songs', [\App\Http\Controllers\SongsController::class, 'index'])
+    ->name('songs.index')
     ->middleware('auth');
 
 require __DIR__.'/auth.php';

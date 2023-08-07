@@ -10,7 +10,7 @@ class FavoriteSongsController extends Controller
 {
     public function index(User $user)
     {
-        return view('songs.index', ['songs' => $user->favorites]);
+        return view('songs.index', ['songs' => $user->favorites()->paginate(20)]);
     }
 
     public function store(Song $song)
