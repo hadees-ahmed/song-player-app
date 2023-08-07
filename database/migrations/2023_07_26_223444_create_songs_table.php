@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('artist_id')->constrained();
             $table->string('path')->unique();
+            $table->unsignedBigInteger('views')->default(0);
             $table->smallInteger('duration');
             $table->timestamps();
         });
