@@ -1,5 +1,6 @@
 <a href=""><-Dashboard</a>
 <h1>
+    @if(isset($artist))
 @if($artist->image)
 <img src="{{asset('storage/' . $artist->image)}}" alt="not found" class="rounded-sm" width="20" height="30">
     @else
@@ -7,9 +8,11 @@
          alt="not found" class="rounded-sm" width="20" height="30">
 @endif
     {{$artist->name}}
+
 </h1>
 
 <h1>{{$artist->info}}</h1>
+@endif
 
 <h3>{{'Songs'}}</h3>
 
@@ -21,4 +24,4 @@
     >
     <input type="submit" value="search">
 </form>
-    @each('partials.song', $songs, 'song')
+    @include('partials.song',  ['songs' => $songs])
