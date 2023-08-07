@@ -27,8 +27,15 @@ Route::get('songs/create',[\App\Http\Controllers\SongsController::class, 'create
 
 Route::post('songs/store', [\App\Http\Controllers\SongsController::class, 'store'])
     ->name('songs.store');
+
 Route::post('artists/store',[\App\Http\Controllers\ArtistsController::class,'store'])
     ->name('artists.store');
 
 Route::post('songs/{song}/views-increment', [\App\Http\Controllers\ViewsController::class,'increment'])
     ->name('songs.views.increment');
+
+Route::get('add/{song}/favorites',[\App\Http\Controllers\FavoriteSongsController::class,'store'])
+    ->name('add.favorites');
+
+Route::get('remove/{song}/favorites',[\App\Http\Controllers\FavoriteSongsController::class, 'destroy'])
+    ->name('remove.favorites');

@@ -11,10 +11,14 @@
         <source src="{{asset('/storage/' . $song->path )}}" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+
+    @endif
+    
+    @if(auth()->user()->favorites->contains($song->id))
+        <a href="{{ route('remove.favorites', ['song' => $song->id]) }}">Remove from Favorite {{$song->id}}</a>
+    @else
+        <a href="{{ route('add.favorites', ['song' => $song->id]) }}">Add to Favorite {{$song->id}}</a>
     @endif
 
-    <script src="{{ asset('js/audio-player.js') }}"></script>
-
-    <a href=""> {{'Add to Favorite/ Remove from favorite'}}</a>
     {{'by ' . $song->artist->name}}
 </div>

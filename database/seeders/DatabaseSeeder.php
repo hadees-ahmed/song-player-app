@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Artist;
+use App\Models\Favorite;
 use App\Models\Song;
 use App\Models\User;
 use Carbon\Language;
@@ -17,7 +18,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         User::factory(10)->create();
+         $users = User::factory(10)->create();
+
+
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
@@ -27,6 +30,11 @@ class DatabaseSeeder extends Seeder
         \App\Models\Language::factory(5)->create();
 
         Artist::factory(50)->create();
-        Song::factory(300)->create();
+
+        $songs = Song::factory(300)->create();
+
+        foreach ($users as $user) {
+            $user->favorites()->sync($songs->random(random_int(2,3))->pluck('id')->toArray());
+        }
     }
 }
