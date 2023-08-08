@@ -7,6 +7,7 @@ use App\Models\Language;
 use App\Models\Song;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Routing\Route;
 use Tests\TestCase;
 
 class ArtistTest extends \Tests\TestCase
@@ -26,7 +27,7 @@ class ArtistTest extends \Tests\TestCase
         $language = Language::factory()->create();
         $artist = Artist::factory()->create();
 
-        $this->get('artists/' . $artist->id . '/songs')
+        $this->get(\route('artists.songs.index',['artist' => $artist->id]))
             ->assertSee($artist->info);
     }
 
@@ -36,7 +37,7 @@ class ArtistTest extends \Tests\TestCase
         $artist = Artist::factory()->create();
         $song = Song::factory()->create();
 
-        $this->get('artists/' . $artist->id . '/songs')
+        $this->get(\route('artists.songs.index',['artist' => $artist->id]))
             ->assertSee($song->name);
     }
 
@@ -45,7 +46,7 @@ class ArtistTest extends \Tests\TestCase
         $language = Language::factory()->create();
         $artist = Artist::factory()->create();
 
-        $this->get('artists/' . $artist->id . '/songs')
+        $this->get(\route('artists.songs.index',['artist' => $artist->id]))
             ->assertSee($artist->image);
     }
 }

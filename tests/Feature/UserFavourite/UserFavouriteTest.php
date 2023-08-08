@@ -28,7 +28,7 @@ class UserFavouriteTest extends \Tests\TestCase
 
         $this->actingAs($user);
 
-        $this->get(route('add.favorites', [$song->id]));
+        $this->post(route('add.favorites', [$song->id]));
 
         $this->assertDatabaseHas('favorites', ['user_id' => $user->id, 'song_id' => $song->id]);
     }
@@ -43,7 +43,7 @@ class UserFavouriteTest extends \Tests\TestCase
 
         $user->favorites()->attach($song->id);
 
-        $this->get(route('remove.favorites', [$song->id]));
+        $this->delete(route('remove.favorites', [$song->id]));
 
         $this->assertDatabaseMissing('favorites', ['user_id' => $user->id, 'song_id' => $song->id]);
     }

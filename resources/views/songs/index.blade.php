@@ -1,4 +1,4 @@
-<a href=""><-Dashboard</a>
+<a href="{{route('dashboard')}}"><-Dashboard</a>
 <h1>
     @if(isset($artist))
 @if($artist->image)
@@ -8,7 +8,6 @@
          alt="not found" class="rounded-sm" width="20" height="30">
 @endif
     {{$artist->name}}
-
 </h1>
 
 <h1>{{$artist->info}}</h1>
