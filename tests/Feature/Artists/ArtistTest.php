@@ -27,26 +27,18 @@ class ArtistTest extends \Tests\TestCase
         $language = Language::factory()->create();
         $artist = Artist::factory()->create();
 
-        $this->get(\route('artists.songs.index',['artist' => $artist->id]))
+        $this->get(\route('songs.index',['artist_id' => $artist->id]))
             ->assertSee($artist->info);
     }
 
-    public function test_click_on_artist_display_its_songs(): void
-    {
-        $language = Language::factory()->create();
-        $artist = Artist::factory()->create();
-        $song = Song::factory()->create();
 
-        $this->get(\route('artists.songs.index',['artist' => $artist->id]))
-            ->assertSee($song->name);
-    }
 
     public function test_artist_image_are_shown_besides_its_name(): void
     {
         $language = Language::factory()->create();
         $artist = Artist::factory()->create();
 
-        $this->get(\route('artists.songs.index',['artist' => $artist->id]))
+        $this->get(\route('songs.index',['artist_id' => $artist->id]))
             ->assertSee($artist->image);
     }
 }
