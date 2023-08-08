@@ -46,5 +46,16 @@ class SongTest extends \Tests\TestCase
 
         $this->get(route('songs.index', [$artist->id]))
             ->assertSee($song->duration);
+
+    }
+
+    public function test_click_on_artist_display_its_songs(): void
+    {
+        $language = Language::factory()->create();
+        $artist = Artist::factory()->create();
+        $song = Song::factory()->create();
+
+        $this->get(route('songs.index',['artist' => $artist->id]))
+            ->assertSee($artist->song);
     }
 }

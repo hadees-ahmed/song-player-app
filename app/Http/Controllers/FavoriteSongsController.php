@@ -15,9 +15,6 @@ class FavoriteSongsController extends Controller
 
     public function store(Song $song)
     {
-        // @TODO will add auth user when the login functionality will be created
-        // $user = User::first();
-        // auth()->login($user);
         $user = auth()->user();
 
         $user->favorites()->attach($song->id);
@@ -27,10 +24,6 @@ class FavoriteSongsController extends Controller
 
     public function destroy(Song $song)
     {
-//     $user = User::first();
-//
-//     auth()->login($user);
-
         $user = auth()->user();
 
 
