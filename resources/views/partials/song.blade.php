@@ -16,16 +16,22 @@
     @endif
 
     @if(auth()->user()->favorites->contains($song->id))
-        <a href="{{ route('remove.favorites', ['song' => $song->id]) }}">Remove from Favorite</a>
+
+{{--        <a href="{{ route('remove.favorites', ['song' => $song->id]) }}">Remove from Favorite</a>--}}
+        <form method="POST" action="{{route('add.favorites', ['song' => $song->id])}}">
+            @csrf
+            @method('DELETE')
+            <button type="submit">Remove From Favorites</button>
+        </form>
     @else
-        <a href="{{ route('add.favorites', ['song' => $song->id]) }}">Add to Favorite</a>
-    @endif
+        <form method="POST" action="{{route('add.favorites', ['song' => $song->id])}}">
+            @csrf
+            <button type="submit">Add To Favorites</button>
+        </form>    @endif
 
     {{'by ' . $song->artist->name}}
 </div>
 @endforeach
 
-<p>
     {{$songs->links()}}
-</p>
 

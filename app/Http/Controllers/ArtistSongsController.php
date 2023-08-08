@@ -13,7 +13,7 @@ class ArtistSongsController extends Controller
 {
     public function index(Artist $artist)
     {
-        $songs = $artist->songs;
+        $songs = $artist->songs()->paginate(20);
 
         return view('songs.index',[
             'songs' => $songs,

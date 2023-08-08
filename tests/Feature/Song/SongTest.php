@@ -5,6 +5,7 @@ namespace Tests\Feature\Song;
 use App\Models\Artist;
 use App\Models\Language;
 use App\Models\Song;
+use App\Models\User;
 use App\Services\Audio;
 use getID3;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -19,6 +20,7 @@ class SongTest extends \Tests\TestCase
 
     public function test_song_is_store_in_database(): void
     {
+        $user = User::factory()->create();
         $language = Language::factory()->create();
 
         $artist = Artist::factory()->create(['language_id' => $language->id]);
@@ -29,13 +31,14 @@ class SongTest extends \Tests\TestCase
             'audio' =>  UploadedFile::fake()->create('test_song.mp3', 100),
         ];
 
-        $this->post('songs/store', $attributes);
+        $this->actingAs($user)->post('songs/store', $attributes);
 
         $this->assertDatabaseHas('songs',['name' => 'hello']);
     }
 
     public function test_song_duration_is_displayed_along()
     {
+        $user = User::factory()->create();
         $language = Language::factory()->create();
         $artist = Artist::factory()->create();
         $song = Song::factory()->create();
