@@ -1,3 +1,7 @@
+
+@extends('layouts.app')
+
+@section('content')
 <h1>Add New Song</h1>
 <form method="POST" action="{{route('songs.store')}}" enctype="multipart/form-data">
     @csrf
@@ -24,3 +28,4 @@
 
     <input type="submit" value="Publish">
 </form>
+@endsection
