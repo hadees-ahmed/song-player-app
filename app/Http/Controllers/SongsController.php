@@ -12,17 +12,19 @@ use Illuminate\Support\Arr;
 
 class SongsController extends Controller
 {
-    public function index(User $user)
+    public function index()
     {
         $query = Song::query();
 
+        //load artist song
         if (\request()->has('artist_id')) {
             $query->where('artist_id', request()->get('artist_id'));
         }
 
-//        if (\request()->has('trending')) {
-//            $query->latest('views');
-//        }
+        //load trending
+        if (\request()->has('trending')) {
+            $query->latest('views');
+        }
 
         $songs = $query->paginate(20);
 

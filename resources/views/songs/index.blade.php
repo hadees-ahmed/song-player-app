@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <a href="{{route('dashboard')}}"><-Dashboard</a>
 <h1>
     @if(isset($artist))
@@ -24,3 +27,17 @@
     <input type="submit" value="search">
 </form>
     @include('partials.song',  ['songs' => $songs])
+<script>
+    function doSomething(songId) {
+        fetch('songs/' + songId + '/views-increment', {
+            method: 'POST',
+            headers: {
+
+                'Content-Type': 'application/json',
+            },
+        });
+    }
+</script>
+
+<script src="{{ asset('js/audio-player.js') }}" defer></script>
+@endsection
