@@ -47,7 +47,7 @@ Route::post('artists/store',[\App\Http\Controllers\ArtistsController::class,'sto
     ->middleware('auth');
 
 Route::post('songs/{song}/views-increment', [\App\Http\Controllers\ViewsController::class,'increment'])
-    ->name('songs.views.increment');
+    ->name('song.view.increment');
 
 Route::post('user/me/favorites/{song}',[\App\Http\Controllers\FavoriteSongsController::class,'store'])
     ->name('add.favorites')
@@ -61,7 +61,7 @@ Route::get('user/{user}/favorites', [\App\Http\Controllers\FavoriteSongsControll
     ->name('user.favorite.songs')
     ->middleware('auth');
 
-Route::get('songs/{user?}', [\App\Http\Controllers\SongsController::class, 'index'])
+Route::get('songs', [\App\Http\Controllers\SongsController::class, 'index'])
     ->name('songs.index');
 
 require __DIR__.'/auth.php';

@@ -8,11 +8,10 @@
 
     {{--    {{$filePath = '/Users/hadees/song-player/storage/app/public/' . $song->path}}--}}
     @if(file_exists($filePath))
-    <audio controls id="audioPlayer" data-song-id="{{$song->id}}" >
+    <audio  onplay="doSomething({{ $song->id}})"  controls id="audioPlayer"  >
         <source src="{{asset('/storage/' . $song->path )}}" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
-
     @endif
 
     @if(auth()->user()->favorites->contains($song->id))
