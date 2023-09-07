@@ -17,8 +17,16 @@ class SongsController extends Controller
         $query = Song::query();
 
         //load artist song
-        if (\request()->has('artist_id')) {
+        if (!\request()->isNotFilled('artist_id')) {
             $query->where('artist_id', request()->get('artist_id'));
+        }
+
+        if (\request()->has('search')){
+            $query->where('name', 'like', '%' . \request('search') .'%');
+            // @info to search artist as well
+//            ->orWhereHas('artist',function ($q){
+//                    $q->where('name', 'like', '%' . \request('search') . '%');
+//            });
         }
 
         //load trending
@@ -26,9 +34,24 @@ class SongsController extends Controller
             $query->latest('views');
         }
 
+        if (\request()->filled('min_duration')){
+            $seconds = minutesToSeconds(\request('min_duration'));
+            $query->where('duration' ,'>=' , $seconds);
+        }
+
+        if (\request()->filled('max_duration')){
+            $seconds = minutesToSeconds(\request('max_duration'));
+            $query->where('duration' ,'<=' , $seconds);
+        }
         $songs = $query->paginate(20);
 
-        return view('songs.index', ['songs' => $songs]);
+        return view('songs.index', [
+            'songs' => $songs,
+            'artists' => Artist::all(),
+            'filters' => [
+                'artist_id' => \request()->get('artist_id'),
+            ]
+        ]  );
     }
 
     public function create()

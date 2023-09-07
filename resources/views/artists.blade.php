@@ -53,9 +53,7 @@
     </tr>
     @foreach($artists as $artist)
     <tr>
-
         <td>
-
             @if(isset($artist->image))
             <img src="{{asset('storage/' . $artist->image)}}" alt="" class="rounded-sm" width="20" height="30">
             @else
