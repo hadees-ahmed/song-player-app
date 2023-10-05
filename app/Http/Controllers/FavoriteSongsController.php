@@ -26,10 +26,8 @@ class FavoriteSongsController extends Controller
     {
         $user = auth()->user();
 
-
         $user->favorites()->detach($song->id);
 
      return redirect()->back();
     }
-
 }
