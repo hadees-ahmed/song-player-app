@@ -8,3 +8,9 @@ function formatDuration($seconds)
 
     return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
 }
+
+function minutesToSeconds($minutes)
+{
+    return $seconds = $minutes * 60;
+}
+

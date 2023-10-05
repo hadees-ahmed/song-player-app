@@ -17,14 +17,28 @@
 @endif
 
 <h3>{{'Songs'}}</h3>
-
-<form method="POST" action="">
+<form method="GET" action="">
 
     <input type="text" name="search" placeholder="Find something"
            class="bg-transparent placeholder-black font-semibold text-sm"
            value="{{request('search')}}"
     >
-    <input type="submit" value="search">
+
+    <select name="artist_id">
+        <option value="">All</option>
+    @foreach($artists as $artist)
+            <option value="{{$artist->id}}"
+                    @if(isset($filters['artist_id']) && $filters['artist_id'] == $artist->id) selected="selected" @endif
+            >
+                {{$artist->name}}
+        @endforeach
+    </select>
+    <input  type="checkbox" name="trending" value="">
+    <label>Trending</label>
+    <input type="number" name="min_duration" placeholder="Min Duration">
+    <input type="number" name="max_duration" placeholder="Max Duration">
+
+    <input class="ml-8" type="submit" value="search">
 </form>
     @include('partials.song',  ['songs' => $songs])
 <script>
