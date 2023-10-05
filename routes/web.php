@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
 //Route::get('/',[\App\Http\Controllers\DashboardController::class, 'index'])
 //    ->name('dashboard.index');
 Route::get('artists',[\App\Http\Controllers\ArtistsController::class, 'index'])
-    ->name('artists.index');
+    ->name('artists.index')->middleware('auth', 'subscribed');
 
 Route::get('songs/create',[\App\Http\Controllers\SongsController::class, 'create'])
     ->name('songs.create')
@@ -51,7 +51,7 @@ Route::post('songs/{song}/views-increment', [\App\Http\Controllers\ViewsControll
 
 Route::post('user/me/favorites/{song}',[\App\Http\Controllers\FavoriteSongsController::class,'store'])
     ->name('add.favorites')
-    ->middleware('auth');
+    ->middleware('auth', 'subscribed');
 
 Route::delete('user/me/favorites/{song}',[\App\Http\Controllers\FavoriteSongsController::class, 'destroy'])
     ->name('remove.favorites')
@@ -59,9 +59,9 @@ Route::delete('user/me/favorites/{song}',[\App\Http\Controllers\FavoriteSongsCon
 
 Route::get('user/{user}/favorites', [\App\Http\Controllers\FavoriteSongsController::class, 'index'])
     ->name('user.favorite.songs')
-    ->middleware('auth');
+    ->middleware('auth', 'subscribed');
 
 Route::get('songs', [\App\Http\Controllers\SongsController::class, 'index'])
-    ->name('songs.index');
+    ->name('songs.index')->middleware('auth','subscribed');
 
 require __DIR__.'/auth.php';
