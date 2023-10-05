@@ -9,12 +9,14 @@ use App\Models\User;
 use App\Services\Audio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class SongsController extends Controller
 {
     public function index()
     {
         $query = Song::query();
+
 
         //load artist song
         if (!\request()->isNotFilled('artist_id')) {
