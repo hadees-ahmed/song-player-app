@@ -1,6 +1,6 @@
 <?php
-
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -64,4 +64,9 @@ Route::get('user/{user}/favorites', [\App\Http\Controllers\FavoriteSongsControll
 Route::get('songs', [\App\Http\Controllers\SongsController::class, 'index'])
     ->name('songs.index')->middleware('auth','subscribed');
 
+Route::get('/subscribe',[\App\Http\Controllers\SubscriptionController::class, 'create'] )->name('subscribe');
+
+Route::post('/create-payment-intent', [StripeController::class, 'create']);
+
+Route::get('monthly/subscription', [\App\Http\Controllers\SubscriptionController::class, 'subscription'])->name('monthly.subscription');
 require __DIR__.'/auth.php';

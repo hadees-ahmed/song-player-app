@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        'songs/*/views-increment'
+        'songs/*/views-increment',
+        '/create-payment-intent'
     ];
 }
