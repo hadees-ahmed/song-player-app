@@ -64,4 +64,5 @@ Route::get('user/{user}/favorites', [\App\Http\Controllers\FavoriteSongsControll
 Route::get('songs', [\App\Http\Controllers\SongsController::class, 'index'])
     ->name('songs.index')->middleware('auth','subscribed');
 
+Route::get('artists/search',[\App\Http\Controllers\SongsController::class,'index']);
 require __DIR__.'/auth.php';

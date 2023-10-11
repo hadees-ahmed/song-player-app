@@ -23,7 +23,7 @@
     </style>
 </head>
 
-<form method="POST" action="">
+<form method="GET" action="">
 
     <input type="text" name="search" placeholder="Search Artist"
            value="{{request('search')}}"

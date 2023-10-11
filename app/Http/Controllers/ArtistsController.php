@@ -10,7 +10,13 @@ class ArtistsController extends Controller
 {
     public function index()
     {
-        $artists = Artist::withCount('songs')->get();
+        $query = Artist::withCount('songs');
+
+        if (\request('search')){
+            $query->where('name', 'like', '%' . \request('search') .'%');
+        }
+
+        $artists = $query->get();
 
         return view('artists',[
             'artists' => $artists
@@ -24,4 +30,5 @@ class ArtistsController extends Controller
             ->update(['image' => $request->file('artist_image')->store('artist-images')]);
         return redirect()->back();
     }
+
 }
