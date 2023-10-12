@@ -63,6 +63,9 @@ Route::get('user/{user}/favorites', [\App\Http\Controllers\FavoriteSongsControll
 
 Route::get('songs', [\App\Http\Controllers\SongsController::class, 'index'])
     ->name('songs.index')->middleware('auth','subscribed');
-
+// search artists
 Route::get('artists/search',[\App\Http\Controllers\SongsController::class,'index']);
+
+Route::get('admin/panel', [\App\Http\Controllers\AdminController::class, 'create'])
+    ->name('admin.panel');
 require __DIR__.'/auth.php';

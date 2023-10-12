@@ -21,14 +21,11 @@ class ArtistsController extends Controller
         return view('artists',[
             'artists' => $artists
         ]);
-
     }
-
     public function store(StoreArtistRequest $request){
 
         Artist::where('id', $request->get('artist_id'))
             ->update(['image' => $request->file('artist_image')->store('artist-images')]);
         return redirect()->back();
     }
-
 }

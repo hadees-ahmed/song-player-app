@@ -1,5 +1,6 @@
 @foreach($songs as $song)
-<div class="p-6 text-gray-900">
+<div class="p-6 text-gray-900"  style="display: flex; justify-content: space-between; align-items: center;">
+    <div>
     {{ $song->name }}
     {{ 'Duration= ' . formatDuration($song->duration)}}
     {{'views =' . $song->views}}
@@ -27,8 +28,14 @@
             @csrf
             <button type="submit">Add To Favorites</button>
         </form>    @endif
+        {{'by ' . $song->artist->name}}
 
-    {{'by ' . $song->artist->name}}
+    </div>
+<div>
+    <a href="{{ route('songs.create', ['song' => $song->id]) }}">Edit</a> <!-- Add Edit Link -->
+    <span style="margin-left: 10px;"></span> <!-- Add some spacing between buttons -->
+    <a href="{{ route('songs.create', ['song' => $song->id]) }}">Delete</a> <!-- Add Delete Link -->
+</div>
 </div>
 @endforeach
 
