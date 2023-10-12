@@ -61,10 +61,17 @@ class SongsController extends Controller
         return view('songs.form',['artists' => Artist::withCount('songs')->get()]);
     }
 
+    public function edit(Song $song)
+    {
+        return view('songs.form',[
+            'artists' => Artist::withCount('songs')->get(),
+            'song' => $song
+            ]);
+    }
+
     public function store(StoreSongRequest $request)
     {
         $attributes = $request->validated();
-
 
         $attributes['path'] = $request->file('audio')->store('songs');
         $attributes['duration'] = (new Audio())->getDuration($request->file('audio')
@@ -76,5 +83,25 @@ class SongsController extends Controller
         Song::create($attributes);
 
         return view('dashboard');
+    }
+
+    public function destroy(Song $song)
+    {
+        $this->authorize('delete', $song);
+        $song->delete();
+    }
+
+    public function update(Song $song, StoreSongRequest $request)
+    {
+        $this->authorize('update', $song);
+
+        $attributes['path'] = $request->file('audio')->store('songs');
+
+        $attributes = $request->validated();
+
+        $song->update($attributes);
+
+        return redirect()->back();
+
     }
 }

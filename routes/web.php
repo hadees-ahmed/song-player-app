@@ -68,4 +68,13 @@ Route::get('artists/search',[\App\Http\Controllers\SongsController::class,'index
 
 Route::get('admin/panel', [\App\Http\Controllers\AdminController::class, 'create'])
     ->name('admin.panel');
+
+Route::get('songs/{song}/delete',[\App\Http\Controllers\SongsController::class, 'destroy'])
+    ->name('songs.delete');
+
+Route::post('songs/{song}/update', [\App\Http\Controllers\SongsController::class, 'update'])
+    ->name('songs.update');
+
+Route::get('songs/{song}/edit', [\App\Http\Controllers\SongsController::class, 'edit'])
+    ->name('songs.edit');
 require __DIR__.'/auth.php';

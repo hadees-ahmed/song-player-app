@@ -32,9 +32,9 @@
 
     </div>
 <div>
-    <a href="{{ route('songs.create', ['song' => $song->id]) }}">Edit</a> <!-- Add Edit Link -->
+    <a href="{{ route('songs.edit', ['song' => $song->id]) }}">Edit</a> <!-- Add Edit Link -->
     <span style="margin-left: 10px;"></span> <!-- Add some spacing between buttons -->
-    <a href="{{ route('songs.create', ['song' => $song->id]) }}">Delete</a> <!-- Add Delete Link -->
+    <a href="{{ route('songs.delete', ['song' => $song->id]) }}">Delete</a> <!-- Add Delete Link -->
 </div>
 </div>
 @endforeach
