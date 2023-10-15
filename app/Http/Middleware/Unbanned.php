@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class SubscribedOnly
+class Unbanned
 {
     /**
      * Handle an incoming request.
@@ -18,12 +18,11 @@ class SubscribedOnly
     {
         // Check if the user is authenticated
         if (Auth::check()) {
-            // Check if the user is subscribed
-            if (Auth::user()->is_subscribed) {
+            // Check if the user is unbanned
+            if (!Auth::user()->is_banned) {
                 return $next($request);
             }
         }
-        // Redirect or return an error response for unauthorized access
-        return redirect()->back()->with('error', 'You must be subscribed to access this feature.');
+        return redirect()->back();
     }
 }

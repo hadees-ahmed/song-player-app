@@ -1,6 +1,11 @@
 <?php
-
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ArtistsController;
+use App\Http\Controllers\FavoriteSongsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SongsController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ViewsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,8 +24,10 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-
-    return view('dashboard');
+    if (! auth()->user()->is_banned) {
+        return view('dashboard');
+    }
+    return view('users.ban');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -31,50 +38,80 @@ Route::middleware('auth')->group(function () {
 
 //Route::get('/',[\App\Http\Controllers\DashboardController::class, 'index'])
 //    ->name('dashboard.index');
-Route::get('artists',[\App\Http\Controllers\ArtistsController::class, 'index'])
+Route::get('artists',[ArtistsController::class, 'index'])
     ->name('artists.index')->middleware('auth', 'subscribed');
 
-Route::get('songs/create',[\App\Http\Controllers\SongsController::class, 'create'])
+Route::get('songs/create',[SongsController::class, 'create'])
     ->name('songs.create')
     ->middleware('auth');
 
-Route::post('songs/store', [\App\Http\Controllers\SongsController::class, 'store'])
+Route::post('songs/store', [SongsController::class, 'store'])
     ->name('songs.store')
-    ->middleware('auth');
+    ->middleware('auth','subscribed', 'unbanned');
 
-Route::post('artists/store',[\App\Http\Controllers\ArtistsController::class,'store'])
+Route::post('artists/store',[ArtistsController::class,'store'])
     ->name('artists.store')
-    ->middleware('auth');
+    ->middleware('auth','subscribed', 'unbanned');
 
-Route::post('songs/{song}/views-increment', [\App\Http\Controllers\ViewsController::class,'increment'])
+Route::post('songs/{song}/views-increment', [ViewsController::class,'increment'])
     ->name('song.view.increment');
 
-Route::post('user/me/favorites/{song}',[\App\Http\Controllers\FavoriteSongsController::class,'store'])
+Route::post('user/me/favorites/{song}',[FavoriteSongsController::class,'store'])
     ->name('add.favorites')
-    ->middleware('auth', 'subscribed');
+    ->middleware('auth','subscribed', 'unbanned');
 
-Route::delete('user/me/favorites/{song}',[\App\Http\Controllers\FavoriteSongsController::class, 'destroy'])
+Route::delete('user/me/favorites/{song}',[FavoriteSongsController::class, 'destroy'])
     ->name('remove.favorites')
-    ->middleware('auth');
+    ->middleware('auth','subscribed', 'unbanned');
 
-Route::get('user/{user}/favorites', [\App\Http\Controllers\FavoriteSongsController::class, 'index'])
+Route::get('user/{user}/favorites', [FavoriteSongsController::class, 'index'])
     ->name('user.favorite.songs')
-    ->middleware('auth', 'subscribed');
+    ->middleware('auth','subscribed', 'unbanned');
 
-Route::get('songs', [\App\Http\Controllers\SongsController::class, 'index'])
-    ->name('songs.index')->middleware('auth','subscribed');
+Route::get('songs', [SongsController::class, 'index'])
+    ->name('songs.index')
+    ->middleware('auth','subscribed', 'unbanned');
 // search artists
-Route::get('artists/search',[\App\Http\Controllers\SongsController::class,'index']);
+Route::get('artists/search',[SongsController::class,'index'])
+    ->middleware('auth','subscribed', 'unbanned');
 
-Route::get('admin/panel', [\App\Http\Controllers\AdminController::class, 'create'])
-    ->name('admin.panel');
+Route::get('admin/panel', [AdminController::class, 'create'])
+    ->name('admin.panel')
+    ->middleware('auth','subscribed', 'unbanned', 'admin');
 
-Route::get('songs/{song}/delete',[\App\Http\Controllers\SongsController::class, 'destroy'])
-    ->name('songs.delete');
+Route::get('songs/{song}/delete',[SongsController::class, 'destroy'])
+    ->name('songs.delete')
+    ->middleware('auth','subscribed', 'unbanned', 'admin');
 
-Route::post('songs/{song}/update', [\App\Http\Controllers\SongsController::class, 'update'])
-    ->name('songs.update');
+Route::post('songs/{song}/update', [SongsController::class, 'update'])
+    ->name('songs.update')
+    ->middleware('auth','subscribed', 'unbanned', 'admin');
 
-Route::get('songs/{song}/edit', [\App\Http\Controllers\SongsController::class, 'edit'])
-    ->name('songs.edit');
+Route::get('songs/{song}/edit', [SongsController::class, 'edit'])
+    ->name('songs.edit')
+    ->middleware('auth','subscribed', 'unbanned', 'admin');
+
+Route::get('users/index',[UsersController::class, 'index'])
+    ->name('users.index')
+    ->middleware('auth','subscribed', 'unbanned', 'admin');
+
+Route::get('users/{user}/delete', [UsersController::class, 'destroy'])
+    ->name('users.delete')
+    ->middleware('auth','subscribed', 'unbanned', 'admin');
+
+Route::get('users/{user}/edit',[UsersController::class, 'edit'])
+    ->name('users.edit')
+    ->middleware('auth','subscribed', 'unbanned', 'admin');
+
+Route::get('users/{user}/update',[UsersController::class, 'update'])
+    ->name('users.update')
+    ->middleware('auth','subscribed', 'unbanned', 'admin');
+
+Route::get('users/{user}/ban',[UsersController::class, 'ban'])
+    ->name('users.ban')
+    ->middleware('auth','subscribed', 'unbanned', 'admin');
+
+Route::get('users/{user}/unban',[UsersController::class, 'unban'])
+    ->name('users.unban')
+    ->middleware('auth','subscribed', 'unbanned', 'admin');
 require __DIR__.'/auth.php';

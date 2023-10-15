@@ -102,6 +102,5 @@ class SongsController extends Controller
         $song->update($attributes);
 
         return redirect()->back();
-
     }
 }

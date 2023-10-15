@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class SubscribedOnly
+class AdminsOnly
 {
     /**
      * Handle an incoming request.
@@ -16,14 +16,12 @@ class SubscribedOnly
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Check if the user is authenticated
         if (Auth::check()) {
-            // Check if the user is subscribed
-            if (Auth::user()->is_subscribed) {
+            // Check if the user is admin
+            if (Auth::user()->is_admin) {
                 return $next($request);
             }
+            return redirect()->back();
         }
-        // Redirect or return an error response for unauthorized access
-        return redirect()->back()->with('error', 'You must be subscribed to access this feature.');
     }
 }
