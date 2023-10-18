@@ -44,7 +44,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function favorites(){
+    public function favorites()
+    {
        return $this->belongsToMany(Song::class, 'favorites');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
     }
 }

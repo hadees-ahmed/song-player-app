@@ -17,6 +17,7 @@
 @endif
 
 <h3>{{'Songs'}}</h3>
+<a href="{{route('songs.create')}}">Add New Song</a>
 <form method="GET" action="">
 
     <input type="text" name="search" placeholder="Find something"
