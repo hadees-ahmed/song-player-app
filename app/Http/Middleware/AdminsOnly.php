@@ -18,7 +18,7 @@ class AdminsOnly
     {
         if (Auth::check()) {
             // Check if the user is admin
-            if (Auth::user()->is_admin) {
+            if (Auth::user()->admin_at != null) {
                 return $next($request);
             }
             return redirect()->back();

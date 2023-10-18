@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('is_subscribed')->default(false);
-            $table->boolean('is_admin')->default(false);
-            $table->boolean('is_banned')->default(false);
+            $table->timestamp('admin_at')->nullable()->default(null);
+            $table->timestamp('banned_at')->nullable()->default(null);
             $table->rememberToken();
             $table->timestamps();
         });

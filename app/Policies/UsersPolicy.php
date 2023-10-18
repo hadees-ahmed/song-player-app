@@ -21,7 +21,7 @@ class UsersPolicy
 
     public function ban(User $user)
     {
-        return auth()->user()->is_admin;
+        return auth()->user()->admin_at;
     }
 
     public function unban(User $user)
