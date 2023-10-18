@@ -43,7 +43,7 @@ class UsersController extends Controller
 
         Mail::to($user)->send(new UserBanned($user));
 
-        $user->update(['is_banned'=> true]);
+        $user->update(['banned_at'=> now()]);
 
         return redirect()->back();
     }
@@ -52,7 +52,7 @@ class UsersController extends Controller
     {
         $this->authorize('unban', $user);
 
-        $user->update(['is_banned'=> false]);
+        $user->update(['banned_at'=> null]);
 
         return redirect()->back();
     }

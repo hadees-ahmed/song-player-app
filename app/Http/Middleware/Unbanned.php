@@ -19,7 +19,7 @@ class Unbanned
         // Check if the user is authenticated
         if (Auth::check()) {
             // Check if the user is unbanned
-            if (!Auth::user()->is_banned) {
+            if (Auth::user()->banned_at == null) {
                 return $next($request);
             }
         }

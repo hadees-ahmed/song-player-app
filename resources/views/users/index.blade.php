@@ -20,12 +20,11 @@
             <td>{{$user->email}}</td>
             <td><a href="{{route('users.delete',['user' => $user->id])}}">Delete</a></td>
             <td><a href="{{route('users.edit', ['user' => $user->id])}}">Edit</a></td>
-            @if(!$user->is_banned)
+            @if(!$user->banned_at)
                 <td><a href="{{route('users.ban', ['user' => $user->id])}}">Ban</a></td>
             @else
                 <td><a href="{{route('users.unban', ['user' => $user->id])}}">Unban</a></td>
             @endif
-
         </tr>
     @endforeach
 </table>
