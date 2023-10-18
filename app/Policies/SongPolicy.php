@@ -17,11 +17,11 @@ class SongPolicy
 
     public function delete()
     {
-        return auth()->user()->is_admin;
+        return auth()->user()->admin_at;
     }
 
     public function update()
     {
-        return auth()->user()->is_admin;
+        return auth()->user()->admin_at;
     }
 }

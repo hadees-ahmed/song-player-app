@@ -90,6 +90,8 @@ class SongsController extends Controller
     {
         $this->authorize('delete', $song);
         $song->delete();
+
+        return back();
     }
 
     public function update(Song $song, StoreSongRequest $request)
@@ -102,6 +104,6 @@ class SongsController extends Controller
 
         $song->update($attributes);
 
-        return redirect()->back();
+        return back();
     }
 }
