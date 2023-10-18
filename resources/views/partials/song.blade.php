@@ -31,7 +31,29 @@
         {{'by ' . $song->artist->name}}
 
     </div>
-<div>
+
+{{--    @if(! auth()->user()->ratings->pluck('song_id')->contains($song->id))--}}
+    @if(! $rating = auth()->user()->ratings->where('song_id', $song->id)->first())
+        <div>
+            <form method="POST" action="{{route('ratings.store', ['song' => $song->id])}}">
+                @csrf
+                <select name="stars">
+                    @foreach(range(1, 5) as $i)
+                        <option value={{ $i }} > {{ $i }} Star</option>
+                    @endforeach
+                </select>
+                <button type="submit"> Rate</button>
+            </form>
+        </div>
+    @else
+        <p> You rated {{$rating->stars}} Stars</p>
+    @endif
+
+    <div>
+        <p>Average Ratings  {{round($song->ratings_avg_stars, 1)}} </p>
+    </div>
+
+    <div>
     <a href="{{ route('songs.edit', ['song' => $song->id]) }}">Edit</a> <!-- Add Edit Link -->
     <span style="margin-left: 10px;"></span> <!-- Add some spacing between buttons -->
     <a href="{{ route('songs.delete', ['song' => $song->id]) }}">Delete</a> <!-- Add Delete Link -->

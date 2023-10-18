@@ -114,4 +114,7 @@ Route::get('users/{user}/ban',[UsersController::class, 'ban'])
 Route::get('users/{user}/unban',[UsersController::class, 'unban'])
     ->name('users.unban')
     ->middleware('auth','subscribed', 'unbanned', 'admin');
+
+Route::post('songs/{song}/ratings',[\App\Http\Controllers\RatingsController::class, 'store'])
+    ->name('ratings.store');
 require __DIR__.'/auth.php';

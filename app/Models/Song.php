@@ -14,4 +14,10 @@ class Song extends Model
     {
         return $this->belongsTo(Artist::class);
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
 }

@@ -15,8 +15,8 @@ class SongsController extends Controller
 {
     public function index()
     {
-        $query = Song::query();
-
+        $query = Song::query()->with('artist')
+            ->withAvg('ratings', 'stars');
 
         //load artist song
         if (!\request()->isNotFilled('artist_id')) {
@@ -45,6 +45,7 @@ class SongsController extends Controller
             $seconds = minutesToSeconds(\request('max_duration'));
             $query->where('duration' ,'<=' , $seconds);
         }
+
         $songs = $query->paginate(20);
 
         return view('songs.index', [
