@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Mail\UserBanned;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class UsersController extends Controller
 {
@@ -39,6 +41,8 @@ class UsersController extends Controller
     {
         $this->authorize('ban', $user);
 
+        Mail::to($user)->send(new UserBanned($user));
+
         $user->update(['is_banned'=> true]);
 
         return redirect()->back();
@@ -52,5 +56,4 @@ class UsersController extends Controller
 
         return redirect()->back();
     }
-
 }
