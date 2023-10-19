@@ -77,5 +77,13 @@ Route::prefix('artists')->group(function () {
         ->name('artists.store');
 });
 
+Route::get('/subscriptions', [\App\Http\Controllers\SubscriptionController::class, 'create']);
+
+Route::post('subscriptions/{method}/store', [\App\Http\Controllers\SubscriptionController::class, 'store'])
+    ->name('subscribe.store');
+
+Route::get('payment/done', [\App\Http\Controllers\SubscriptionController::class, 'done'])
+    ->name('payment.done');
+
 require __DIR__.'/auth.php';
 //require __DIR__.'/admin.php';

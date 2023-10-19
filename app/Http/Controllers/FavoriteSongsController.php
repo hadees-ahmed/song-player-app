@@ -28,6 +28,6 @@ class FavoriteSongsController extends Controller
 
         $user->favorites()->detach($song->id);
 
-     return redirect()->back();
+        return redirect()->back();
     }
 }

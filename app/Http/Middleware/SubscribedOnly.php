@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
@@ -19,7 +18,8 @@ class SubscribedOnly
         // Check if the user is authenticated
         if (Auth::check()) {
             // Check if the user is subscribed
-            if (Auth::user()->is_subscribed) {
+            if ($request->user() && $request->user()->subscribed('default')) {
+                // This user is not a paying customer...
                 return $next($request);
             }
         }
