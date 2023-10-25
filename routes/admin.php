@@ -51,5 +51,5 @@ Route::get('{user}/unban',[UsersController::class, 'unban'])
 });
 
 
-Route::get('admin/panel', [AdminController::class, 'create'])
+Route::get('/panel', [AdminController::class, 'create'])
     ->name('admin.panel');

@@ -32,4 +32,10 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.store');
+
+//    Route::get('translate/french',[\App\Http\Controllers\LanguageController::class, 'french'])
+//        ->name('translate.french')->middleware('auth');
+//
+//    Route::get('translate/english',[\App\Http\Controllers\LanguageController::class, 'english'])
+//        ->name('translate.english')->middleware('auth');
 });

@@ -26,7 +26,7 @@ Route::get('/dashboard', function () {
         return view('dashboard');
     }
     return view('users.ban');
-})->middleware( 'verified')->name('dashboard');
+})->middleware( 'verified', 'setLocale')->name('dashboard');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -6,6 +6,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Mail\UserBanned;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class UsersController extends Controller
@@ -19,7 +20,7 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
-     return view('users.form', ['user' => $user]);
+        return view('users.form', ['user' => $user]);
     }
 
     public function destroy(User $user)

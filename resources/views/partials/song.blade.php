@@ -21,12 +21,12 @@
         <form method="POST" action="{{route('add.favorites', ['song' => $song->id])}}">
             @csrf
             @method('DELETE')
-            <button type="submit">Remove From Favorites</button>
+            <button type="submit">{{__('Remove From Favorites')}}</button>
         </form>
     @else
         <form method="POST" action="{{route('add.favorites', ['song' => $song->id])}}">
             @csrf
-            <button type="submit">Add To Favorites</button>
+            <button type="submit">{{__('Add To Favorites')}}</button>
         </form>    @endif
         {{'by ' . $song->artist->name}}
 
@@ -39,18 +39,18 @@
                 @csrf
                 <select name="stars">
                     @foreach(range(1, 5) as $i)
-                        <option value={{ $i }} > {{ $i }} Star</option>
+                        <option value={{ $i }} > {{ $i }} {{__('Star')}}</option>
                     @endforeach
                 </select>
-                <button type="submit"> Rate</button>
+                <button type="submit"> {{__('Rate')}}</button>
             </form>
         </div>
     @else
-        <p> You rated {{$rating->stars}} Stars</p>
+        <p> {{__('You Rated')}} {{$rating->stars}} {{__('Stars')}}</p>
     @endif
 
     <div>
-        <p>Average Ratings  {{round($song->ratings_avg_stars, 1)}} </p>
+        <p>{{__('Average Ratings')}}  {{round($song->ratings_avg_stars, 1)}} </p>
     </div>
 
     <div>
