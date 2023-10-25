@@ -2,6 +2,7 @@
     <tr>
         <th>Name</th>
         <th>Email</th>
+        <th>Joined</th>
         <th>Destroy</th>
         <th>Update</th>
         <th>Block</th>
@@ -18,6 +19,7 @@
                 <a href="">{{$user->name}}</a>
             </td>
             <td>{{$user->email}}</td>
+            <td>{{$user->created_at->timezone(auth()->user()->timezone)->format('F j, Y g:i A') }}</td>
             <td><a href="{{route('users.delete',['user' => $user->id])}}">Delete</a></td>
             <td><a href="{{route('users.edit', ['user' => $user->id])}}">Edit</a></td>
             @if(!$user->banned_at)

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->boolean('is_subscribed')->default(false);
             $table->timestamp('admin_at')->nullable()->default(null);
             $table->timestamp('banned_at')->nullable()->default(null);
+            $table->string('timezone')->default('UTC');
             $table->rememberToken();
             $table->timestamps();
         });
