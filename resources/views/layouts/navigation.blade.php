@@ -17,11 +17,8 @@
                     </x-nav-link>
 
                     <x-nav-link>
-                        @if(App::isLocale('en'))
-                            <a href="{{route('translate.french')}}">{{__('Translate To French')}}</a>
-                        @else
-                            <a href="{{route('translate.english')}}">{{__('Translate To English')}}</a>
-                        @endif
+                        {{--@to load locale route--}}
+                        <x-locale/>
                     </x-nav-link>
                 </div>
             </div>

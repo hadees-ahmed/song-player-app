@@ -48,11 +48,7 @@
         <a href="{{route('admin.panel')}}">{{__('Admin Panel')}}</a>
         @endif
 
-        @if(App::isLocale('en'))
-            <a href="{{route('translate.french')}}">{{__('Translate To French')}}</a>
-        @else
-            <a href="{{route('translate.english')}}">{{__('Translate To English')}}</a>
-        @endif
+        <x-locale/>
 
 
         <div class="mt-16">

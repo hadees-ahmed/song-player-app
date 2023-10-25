@@ -22,11 +22,7 @@
                 </a>
             </div>
             <div>
-                @if(App::isLocale('en'))
-                    <a href="{{route('translate.french')}}">{{__('Translate To French')}}</a>
-                @else
-                    <a href="{{route('translate.english')}}">{{__('Translate To English')}}</a>
-                @endif
+               <x-locale/>
             </div>
 
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
