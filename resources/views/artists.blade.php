@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Artists</h1>
+<h1>{{__('Artists')}}</h1>
 
 <head>
     <style>
@@ -25,10 +25,10 @@
 
 <form method="GET" action="">
 
-    <input type="text" name="search" placeholder="Search Artist"
+    <input type="text" name="search" placeholder="{{__('Search Artist')}}"
            value="{{request('search')}}"
     >
-    <input type="submit" value="search">
+    <input type="submit" value="{{__('search')}}">
 </form>
 
 <form method="POST" action="{{route('artists.store')}}" enctype="multipart/form-data">
@@ -43,13 +43,13 @@
         <option value="{{$artist->id}}">{{$artist->name}}</option>
         @endforeach
     </select>
-    <input type="submit" value="save">
+    <input type="submit" value="{{__('save')}}">
 </form>
 
 <table>
     <tr>
-        <th>Name</th>
-        <th>Language</th>
+        <th>{{__('Name')}}</th>
+        <th>{{__('Language')}}</th>
     </tr>
     @foreach($artists as $artist)
     <tr>

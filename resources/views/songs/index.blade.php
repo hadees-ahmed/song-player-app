@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="{{route('dashboard')}}"><-Dashboard</a>
 <h1>
     @if(isset($artist))
 @if($artist->image)
@@ -16,17 +15,17 @@
 <h1>{{$artist->info}}</h1>
 @endif
 
-<h3>{{'Songs'}}</h3>
+<h3>{{__('Songs')}}</h3>
 <a href="{{route('songs.create')}}">Add New Song</a>
 <form method="GET" action="">
 
-    <input type="text" name="search" placeholder="Find something"
+    <input type="text" name="search" placeholder="{{__('Find something')}}"
            class="bg-transparent placeholder-black font-semibold text-sm"
            value="{{request('search')}}"
     >
 
     <select name="artist_id">
-        <option value="">All</option>
+        <option value="">{{__('All')}}</option>
     @foreach($artists as $artist)
             <option value="{{$artist->id}}"
                     @if(isset($filters['artist_id']) && $filters['artist_id'] == $artist->id) selected="selected" @endif
@@ -35,11 +34,11 @@
         @endforeach
     </select>
     <input  type="checkbox" name="trending" value="">
-    <label>Trending</label>
-    <input type="number" name="min_duration" placeholder="Min Duration">
-    <input type="number" name="max_duration" placeholder="Max Duration">
+    <label>{{__('Trending')}}</label>
+    <input type="number" name="min_duration" placeholder="{{__('Min Duration')}}">
+    <input type="number" name="max_duration" placeholder="{{__('Max Duration')}}">
 
-    <input class="ml-8" type="submit" value="search">
+    <input class="ml-8" type="submit" value="{{__('search')}}">
 </form>
     @include('partials.song',  ['songs' => $songs])
 <script>

@@ -15,6 +15,14 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    <x-nav-link>
+                        @if(App::isLocale('en'))
+                            <a href="{{route('translate.french')}}">{{__('Translate To French')}}</a>
+                        @else
+                            <a href="{{route('translate.english')}}">{{__('Translate To English')}}</a>
+                        @endif
+                    </x-nav-link>
                 </div>
             </div>
 

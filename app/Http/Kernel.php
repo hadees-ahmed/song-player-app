@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminsOnly;
+use App\Http\Middleware\SetLocale;
 use App\Http\Middleware\Unbanned;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -68,6 +69,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'subscribed'=> \App\Http\Middleware\SubscribedOnly::class,
         'unbanned'=>  \App\Http\Middleware\Unbanned::class,
-        'admin'=> \App\Http\Middleware\AdminsOnly::class
+        'admin'=> \App\Http\Middleware\AdminsOnly::class,
+        'setLocale' => SetLocale::class,
     ];
 }
