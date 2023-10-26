@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\RecordLoginTime;
 use App\Http\Controllers\Controller;
+use App\Listeners\UserLoggedIn;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -43,8 +45,8 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
-
         Auth::login($user);
+        event(new RecordLoginTime($user));
 
         return redirect(RouteServiceProvider::HOME);
     }
