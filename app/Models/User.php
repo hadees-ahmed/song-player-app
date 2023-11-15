@@ -50,6 +50,11 @@ class User extends Authenticatable
        return $this->belongsToMany(Song::class, 'favorites');
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function ratings()
     {
         return $this->hasMany(Rating::class);

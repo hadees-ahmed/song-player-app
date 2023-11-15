@@ -10,6 +10,7 @@ use App\Models\User;
 use Carbon\Language;
 use Database\Factories\LanguageFactory;
 use Illuminate\Database\Seeder;
+use Stripe\Product;
 
 class DatabaseSeeder extends Seeder
 {
@@ -40,5 +41,7 @@ class DatabaseSeeder extends Seeder
         foreach ($users as $user) {
             $user->favorites()->sync($songs->random(random_int(2,3))->pluck('id')->toArray());
         }
+
+        \App\Models\Product::factory(5)->create();
     }
 }

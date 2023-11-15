@@ -23,9 +23,9 @@ class SubscriptionController extends Controller
         )->create($paymentMethod);
     }
 
-    public function done()
+    public function confirm()
     {
-        return view('payment-done');
+        return view('subscriptions.confirm');
     }
 }
 
