@@ -28,6 +28,14 @@
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
+            <div>
+                    <x-input-label for="timezone" :value="__('Timezone')"/>
+                    <x-select-input id="timezone" class="block mt-1 w-full" name="timezone" :options="$timezones"
+                                    :selected="old('timezone', $user->timezone)"
+                                    required/>
+                    <x-input-error :messages="$errors->get('timezone')" class="mt-2"/>
+            </div>
+
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800">
