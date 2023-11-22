@@ -29,7 +29,7 @@
                     'Content-Type': 'application/json',
                 },
             }).then((response) => {
-                window.location = "{{ route('payment.done') }}"
+                window.location = "{{ route('subscriptions.confirm') }}"
             }).catch((error) => {
                console.log(error);
             });

@@ -2,8 +2,12 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArtistsController;
 use App\Http\Controllers\FavoriteSongsController;
+use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RatingsController;
 use App\Http\Controllers\SongsController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ViewsController;
 use Illuminate\Support\Facades\Route;
@@ -18,8 +22,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-
 
 Route::get('/dashboard', function () {
     if (! auth()->user()->banned_at) {
@@ -47,7 +49,7 @@ Route::prefix('songs')->name('songs.')->group(function () {
         ->name('index');
 });
 
-Route::post('songs/{song}/ratings', [\App\Http\Controllers\RatingsController::class, 'store'])
+Route::post('songs/{song}/ratings', [RatingsController::class, 'store'])
     ->name('ratings.store');
 
 
@@ -77,13 +79,23 @@ Route::prefix('artists')->group(function () {
         ->name('artists.store');
 });
 
-Route::get('/subscriptions', [\App\Http\Controllers\SubscriptionController::class, 'create']);
+Route::get('/subscriptions', [SubscriptionController::class, 'create']);
 
-Route::post('subscriptions/{method}/store', [\App\Http\Controllers\SubscriptionController::class, 'store'])
+Route::post('subscriptions/{method}/store', [SubscriptionController::class, 'store'])
     ->name('subscribe.store');
 
-Route::get('payment/done', [\App\Http\Controllers\SubscriptionController::class, 'done'])
-    ->name('payment.done');
+Route::get('subscriptions/confirm', [SubscriptionController::class, 'confirm'])
+    ->name('subscriptions.confirm');
+
+Route::get('products',[ProductsController::class, 'index']);
+
+Route::post('orders/{product}/store',[OrdersController::class, 'store'])
+    ->name('orders.store');
+
+Route::POST('orders/{product}',[OrdersController::class, 'destroy'])
+    ->name('orders.destroy');
+
+Route::get('basket/index', [OrdersController::class , 'index'])->name('orders.basket');
 
 require __DIR__.'/auth.php';
 //require __DIR__.'/admin.php';
